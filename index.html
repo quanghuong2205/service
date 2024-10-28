@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<script>
+  window.onload = () => {
+    // Lấy phần tử chứa iframe
+    const wrap = document.querySelector(".iframe");
+
+    // Tạo một iframe mới
+    const iframe = document.createElement("iframe");
+
+    // Thiết lập thuộc tính cho iframe
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
+    iframe.src = "http://localhost:3001/auth"; // Chú ý: sử dụng HTTPS nếu có thể
+    iframe.frameBorder = "0";
+
+    // Thêm iframe vào phần tử chứa
+    wrap.appendChild(iframe);
+
+    // Lắng nghe các thông điệp từ iframe
+    window.addEventListener("message", (event) => {
+      // Kiểm tra nguồn gốc
+      if (event.origin !== "http://localhost:3001") {
+        console.warn("Nhận được thông điệp từ nguồn không xác định:", event.origin);
+        return; // Không xử lý thông điệp từ nguồn không xác định
+      }
+
+      console.log("Nhận thông điệp:", event.data);
+    }, false);
+  };
+</script>
+
+<style>
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, .3);
+  }
+
+  .iframe {
+    background-color: #fff;
+  }
+</style>
+
+<body>
+  <div class="wrapper">
+    <div class="iframe" style="border-radius: 16px;
+    overflow: hidden; margin-top: 20px; width: min(540px,100% - 32px); height: min(660px,100% - 32px);">
+
+    </div>
+  </div>
+</body>
+
+</html>

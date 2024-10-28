@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self' http://localhost:3001;">
+
 </head>
 
 <script>
@@ -20,6 +22,7 @@
     iframe.style.height = "100%";
     iframe.src = "http://localhost:3001/auth"; // Chú ý: sử dụng HTTPS nếu có thể
     iframe.frameBorder = "0";
+    iframe.sandbox = "allow-same-origin allow-scripts"
 
     // Thêm iframe vào phần tử chứa
     wrap.appendChild(iframe);
@@ -32,10 +35,12 @@
         return; // Không xử lý thông điệp từ nguồn không xác định
       }
 
-      wrap.removeChild(iframe); // Loại bỏ iframe khỏi phần tử chứa
+      console.log(event)
 
-      // Thay đổi vị trí của cửa sổ (nếu cần)
-      window.location.replace("/hello.html");
+      // wrap.removeChild(iframe); // Loại bỏ iframe khỏi phần tử chứa
+
+      // // Thay đổi vị trí của cửa sổ (nếu cần)
+      // window.location.replace("/hello.html");
     }, false);
   };
 </script>

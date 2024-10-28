@@ -32,7 +32,10 @@
         return; // Không xử lý thông điệp từ nguồn không xác định
       }
 
-      console.log("Nhận thông điệp:", event.data);
+      wrap.removeChild(iframe); // Loại bỏ iframe khỏi phần tử chứa
+
+      // Thay đổi vị trí của cửa sổ (nếu cần)
+      window.location.replace("/hello.html");
     }, false);
   };
 </script>
